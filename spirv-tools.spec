@@ -2,7 +2,7 @@
 Summary:	SPIR-V Tools
 Name:		spirv-tools
 Version:	1.0_rev3
-Release:	0.1
+Release:	1
 License:	MIT-like
 Group:		Applications
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/spirv-%{_ver}/%{name}-%{version}.tar.gz
