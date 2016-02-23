@@ -1,12 +1,15 @@
+
+%define	snap	20160222
+%define commit	9413fbbf587b23541c4339943325a474641cd605
 %define	_ver	%(echo %{version} | tr _ -)
 Summary:	SPIR-V Tools
 Name:		spirv-tools
-Version:	1.0_rev3
+Version:	1.0_rev3.s%{snap}
 Release:	1
 License:	MIT-like
 Group:		Applications
-Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/spirv-%{_ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	81a72c33f7d50d010de760d55a96683f
+Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
+# Source0-md5:	d11ec2de7a44a68535b0dbd62f0cc5b6
 Patch0:		cmake-lib64.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake
@@ -49,7 +52,7 @@ Header files for %{name} library.
 Pliki nagłówkowe biblioteki %{name}.
 
 %prep
-%setup -q -n SPIRV-Tools-spirv-%{_ver}
+%setup -q -n SPIRV-Tools-%{commit}
 %patch0 -p1
 
 %build
