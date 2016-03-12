@@ -1,0 +1,9 @@
+diff -dur SPIRV-Tools-476989e7b715529aa8063016dc44e31bbf3e08bc.orig/utils/update_build_version.py SPIRV-Tools-476989e7b715529aa8063016dc44e31bbf3e08bc/utils/update_build_version.py
+--- SPIRV-Tools-476989e7b715529aa8063016dc44e31bbf3e08bc.orig/utils/update_build_version.py	2016-03-11 21:30:38.000000000 +0100
++++ SPIRV-Tools-476989e7b715529aa8063016dc44e31bbf3e08bc/utils/update_build_version.py	2016-03-12 19:14:32.499715318 +0100
+@@ -82,5 +82,3 @@
+         sys.exit(0)
+     open(OUTFILE, 'w').write(new_content)
+ 
+-if __name__ == '__main__':
+-    main()

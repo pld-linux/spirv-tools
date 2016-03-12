@@ -1,6 +1,6 @@
 
-%define	snap	20160222
-%define commit	9413fbbf587b23541c4339943325a474641cd605
+%define	snap	20150312
+%define commit	476989e7b715529aa8063016dc44e31bbf3e08bc
 %define	_ver	%(echo %{version} | tr _ -)
 Summary:	SPIR-V Tools
 Name:		spirv-tools
@@ -9,8 +9,9 @@ Release:	1
 License:	MIT-like
 Group:		Applications
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
-# Source0-md5:	d11ec2de7a44a68535b0dbd62f0cc5b6
+# Source0-md5:	c86bbabd5b1efea51c49a46099499f7d
 Patch0:		cmake-lib64.patch
+Patch1:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake
 Requires:	%{name}-libs = %{version}-%{release}
@@ -54,12 +55,16 @@ Pliki nagłówkowe biblioteki %{name}.
 %prep
 %setup -q -n SPIRV-Tools-%{commit}
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
 cd build
 %cmake \
 	../
+
+# we know better than utils/update_build_version.py
+echo '"spirv-tools %{commit}\\n"' > build-version.inc
 
 %{__make}
 
