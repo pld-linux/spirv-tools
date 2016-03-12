@@ -1,5 +1,5 @@
 
-%define	snap	20150312
+%define	snap	20160312
 %define commit	476989e7b715529aa8063016dc44e31bbf3e08bc
 %define	_ver	%(echo %{version} | tr _ -)
 Summary:	SPIR-V Tools
