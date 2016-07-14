@@ -1,6 +1,7 @@
 
-%define	snap	20160329
-%define commit	6836e17f243eebfc4a2950faee49ed3a0015b20b
+%define	snap	20160614
+%define commit	37e4600c3efad7b1cfdc1df70a977be82eb3c811
+%define headers_commit	34d319db9d6cefe93191b921f5f1593378a98c4c
 %define	_ver	%(echo %{version} | tr _ -)
 Summary:	SPIR-V Tools
 Name:		spirv-tools
@@ -9,7 +10,9 @@ Release:	1
 License:	MIT-like
 Group:		Applications
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
-# Source0-md5:	3137f99a7137cfbb2aa0973d6ac5d0ff
+# Source0-md5:	323d546700f9d1e72a34f77fec4bacfb
+Source1:	https://github.com/KhronosGroup/SPIRV-Headers/archive/%{headers_commit}/spirv-headers-%{headers_commit}.tar.gz
+# Source1-md5:	94c7722f2be6182e9cf9bc29c6034f02
 Patch0:		cmake-lib64.patch
 Patch1:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
@@ -53,7 +56,9 @@ Header files for %{name} library.
 Pliki nagłówkowe biblioteki %{name}.
 
 %prep
-%setup -q -n SPIRV-Tools-%{commit}
+%setup -q -n SPIRV-Tools-%{commit} -a1
+
+mv SPIRV-Headers-* external/spirv-headers
 
 %patch0 -p1
 %patch1 -p1
@@ -71,10 +76,14 @@ echo '"spirv-tools %{commit}\\n"' > build-version.inc
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_includedir}/spirv
 
 cd build
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+cd ..
+
+cp -a external/spirv-headers/include/spirv/* $RPM_BUILD_ROOT%{_includedir}/spirv
 
 %clean
 rm -rf $RPM_BUILD_ROOT
