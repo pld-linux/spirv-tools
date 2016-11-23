@@ -1,7 +1,7 @@
-diff -dur SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b.orig/source/CMakeLists.txt SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b/source/CMakeLists.txt
---- SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b.orig/source/CMakeLists.txt	2016-03-29 20:51:02.000000000 +0200
-+++ SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b/source/CMakeLists.txt	2016-04-08 09:48:47.000000000 +0200
-@@ -73,5 +73,5 @@
+diff -dur -x '*~' -x '*.orig' SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2.orig/source/CMakeLists.txt SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2/source/CMakeLists.txt
+--- SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2.orig/source/CMakeLists.txt	2016-10-27 22:09:06.000000000 +0200
++++ SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2/source/CMakeLists.txt	2016-11-23 14:01:19.000000000 +0100
+@@ -191,5 +191,5 @@
  
  install(TARGETS ${SPIRV_TOOLS}
    RUNTIME DESTINATION bin
@@ -9,11 +9,22 @@ diff -dur SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b.orig/source/CMake
 -  ARCHIVE DESTINATION lib)
 +  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 +  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
-diff -dur SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b.orig/tools/CMakeLists.txt SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b/tools/CMakeLists.txt
---- SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b.orig/tools/CMakeLists.txt	2016-03-29 20:51:02.000000000 +0200
-+++ SPIRV-Tools-6836e17f243eebfc4a2950faee49ed3a0015b20b/tools/CMakeLists.txt	2016-04-08 09:49:34.000000000 +0200
-@@ -47,6 +47,6 @@
+diff -dur -x '*~' -x '*.orig' SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2.orig/source/opt/CMakeLists.txt SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2/source/opt/CMakeLists.txt
+--- SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2.orig/source/opt/CMakeLists.txt	2016-10-27 22:09:06.000000000 +0200
++++ SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2/source/opt/CMakeLists.txt	2016-11-23 14:02:37.000000000 +0100
+@@ -64,5 +64,5 @@
  
+ install(TARGETS SPIRV-Tools-opt
+   RUNTIME DESTINATION bin
+-  LIBRARY DESTINATION lib
+-  ARCHIVE DESTINATION lib)
++  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+diff -dur -x '*~' -x '*.orig' SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2.orig/tools/CMakeLists.txt SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2/tools/CMakeLists.txt
+--- SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2.orig/tools/CMakeLists.txt	2016-10-27 22:09:06.000000000 +0200
++++ SPIRV-Tools-b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2/tools/CMakeLists.txt	2016-11-23 14:01:19.000000000 +0100
+@@ -49,6 +49,6 @@
+   set(SPIRV_INSTALL_TARGETS spirv-as spirv-dis spirv-val spirv-opt spirv-cfg)
    install(TARGETS ${SPIRV_INSTALL_TARGETS}
      RUNTIME DESTINATION bin
 -    LIBRARY DESTINATION lib

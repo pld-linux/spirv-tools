@@ -1,22 +1,20 @@
 
-%define	snap	20160614
-%define commit	37e4600c3efad7b1cfdc1df70a977be82eb3c811
-%define headers_commit	34d319db9d6cefe93191b921f5f1593378a98c4c
+%define	snap	20161027
+%define commit	b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2
 %define	_ver	%(echo %{version} | tr _ -)
 Summary:	SPIR-V Tools
 Name:		spirv-tools
-Version:	1.0_rev3.s%{snap}
+Version:	v2016.6.s%{snap}
 Release:	1
 License:	MIT-like
 Group:		Applications
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
-# Source0-md5:	323d546700f9d1e72a34f77fec4bacfb
-Source1:	https://github.com/KhronosGroup/SPIRV-Headers/archive/%{headers_commit}/spirv-headers-%{headers_commit}.tar.gz
-# Source1-md5:	94c7722f2be6182e9cf9bc29c6034f02
+# Source0-md5:	7312ed45ce0e279aa5829c867ce227e1
 Patch0:		cmake-lib64.patch
 Patch1:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake
+BuildRequires:	spirv-headers
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,6 +45,7 @@ modules.
 Summary:	Header files for %{name} library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki %{name}
 Group:		Development/Libraries
+Requires:	spirv-headers
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
@@ -56,15 +55,15 @@ Header files for %{name} library.
 Pliki nagłówkowe biblioteki %{name}.
 
 %prep
-%setup -q -n SPIRV-Tools-%{commit} -a1
-
-mv SPIRV-Headers-* external/spirv-headers
+%setup -q -n SPIRV-Tools-%{commit}
 
 %patch0 -p1
 %patch1 -p1
 
 %build
-install -d build
+install -d build external/spirv-headers/include
+ln -s /usr/include/spirv external/spirv-headers/include/spirv
+
 cd build
 %cmake \
 	../
@@ -76,14 +75,11 @@ echo '"spirv-tools %{commit}\\n"' > build-version.inc
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_includedir}/spirv
 
 cd build
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 cd ..
-
-cp -a external/spirv-headers/include/spirv/* $RPM_BUILD_ROOT%{_includedir}/spirv
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,8 +95,8 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools.so
+%attr(755,root,root) %{_libdir}/libSPIRV-Tools-opt.so
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/spirv
 %{_includedir}/spirv-tools
