@@ -5,7 +5,7 @@
 Summary:	SPIR-V Tools
 Name:		spirv-tools
 Version:	v2016.6.s%{snap}
-Release:	1
+Release:	2
 License:	MIT-like
 Group:		Applications
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
@@ -15,6 +15,7 @@ Patch1:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake
 BuildRequires:	spirv-headers
+BuildConflicts:	spirv-tools < v2016.6
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
