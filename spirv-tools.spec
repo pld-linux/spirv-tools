@@ -15,7 +15,6 @@ Patch1:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake
 BuildRequires:	spirv-headers
-BuildConflicts:	spirv-tools < v2016.6
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
