@@ -1,15 +1,15 @@
 
-%define	snap	20161027
-%define commit	b371439d6fbc6b7b7cd5b4ef7046faa6cdf0e9e2
+%define	snap	20161219
+%define commit	37422e9dba1a3a8cb8028b779dd546d43add6ef8
 %define	_ver	%(echo %{version} | tr _ -)
 Summary:	SPIR-V Tools
 Name:		spirv-tools
-Version:	v2016.6.s%{snap}
-Release:	2
+Version:	v2016.7
+Release:	0.s%{snap}.1
 License:	MIT-like
 Group:		Applications
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
-# Source0-md5:	7312ed45ce0e279aa5829c867ce227e1
+# Source0-md5:	145629e57b35f2f398945ff4e3c7d5b0
 Patch0:		cmake-lib64.patch
 Patch1:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
