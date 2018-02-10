@@ -1,22 +1,21 @@
 
-%define	snap	20161219
-%define commit	37422e9dba1a3a8cb8028b779dd546d43add6ef8
+%define	snap	20180210
+%define commit	1d7b1423f939027da9a9524765a36fa71be265cd
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	v2016.7
+Version:	v2018.1
 Release:	0.s%{snap}.1
 License:	Apache v2.0
 Group:		Development/Tools
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
-# Source0-md5:	145629e57b35f2f398945ff4e3c7d5b0
-Patch0:		cmake-lib64.patch
-Patch1:		no-git-describe.patch
+# Source0-md5:	8547896f95ccf36e6c48183d0e2f6c87
+Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python
-BuildRequires:	spirv-headers
+BuildRequires:	spirv-headers >= 1.2
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -77,7 +76,6 @@ Pliki nagłówkowe biblioteki SPIR-V Tools.
 %setup -q -n SPIRV-Tools-%{commit}
 
 %patch0 -p1
-%patch1 -p1
 
 %build
 install -d build external/spirv-headers/include
@@ -111,8 +109,12 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools.so
+%attr(755,root,root) %{_libdir}/libSPIRV-Tools-link.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-opt.so
+%attr(755,root,root) %{_libdir}/libSPIRV-Tools-shared.so
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/spirv-tools
+%{_pkgconfigdir}/SPIRV-Tools.pc
+%{_pkgconfigdir}/SPIRV-Tools-shared.pc
