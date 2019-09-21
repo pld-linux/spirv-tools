@@ -1,22 +1,20 @@
-
-%define	snap	20180210
-%define commit	1d7b1423f939027da9a9524765a36fa71be265cd
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	v2018.1
-Release:	0.s%{snap}.1
+Version:	2019.4
+Release:	1
+Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
-Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit}/%{name}-s%{snap}.tar.gz
-# Source0-md5:	8547896f95ccf36e6c48183d0e2f6c87
+Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}.tar.gz
+# Source0-md5:	c666f17aa0338af05918270885f81a6c
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python
-BuildRequires:	spirv-headers >= 1.2
-Requires:	%{name}-libs = %{version}-%{release}
+BuildRequires:	spirv-headers >= 1.5.1
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -64,7 +62,7 @@ Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
 Requires:	spirv-headers
-Requires:	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
 Header files for SPIR-V Tools library.
@@ -73,7 +71,7 @@ Header files for SPIR-V Tools library.
 Pliki nagłówkowe biblioteki SPIR-V Tools.
 
 %prep
-%setup -q -n SPIRV-Tools-%{commit}
+%setup -q -n SPIRV-Tools-%{version}
 
 %patch0 -p1
 
@@ -111,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-link.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-opt.so
+%attr(755,root,root) %{_libdir}/libSPIRV-Tools-reduce.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-shared.so
 
 %files devel
