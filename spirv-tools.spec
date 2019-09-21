@@ -14,7 +14,7 @@ Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	libstdc++-devel >= 6:4.7
-BuildRequires:	python
+BuildRequires:	python3 >= 1:3
 BuildRequires:	spirv-headers >= 1.5.1
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -103,7 +103,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README.md syntax.md
-%attr(755,root,root) %{_bindir}/spirv-*
+%attr(755,root,root) %{_bindir}/spirv-as
+%attr(755,root,root) %{_bindir}/spirv-cfg
+%attr(755,root,root) %{_bindir}/spirv-dis
+%attr(755,root,root) %{_bindir}/spirv-lesspipe.sh
+%attr(755,root,root) %{_bindir}/spirv-link
+%attr(755,root,root) %{_bindir}/spirv-opt
+%attr(755,root,root) %{_bindir}/spirv-reduce
+%attr(755,root,root) %{_bindir}/spirv-val
 
 %files libs
 %defattr(644,root,root,755)
