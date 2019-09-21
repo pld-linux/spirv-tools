@@ -6,6 +6,8 @@ Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
+#Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
+# TODO:		https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}.tar.gz
 # Source0-md5:	c666f17aa0338af05918270885f81a6c
 Patch0:		no-git-describe.patch
@@ -72,7 +74,6 @@ Pliki nagłówkowe biblioteki SPIR-V Tools.
 
 %prep
 %setup -q -n SPIRV-Tools-%{version}
-
 %patch0 -p1
 
 %build
@@ -83,7 +84,7 @@ cd build
 %cmake ..
 
 # we know better than utils/update_build_version.py
-echo '"spirv-tools %{commit}\\n"' > build-version.inc
+echo '"spirv-tools %{version}\\n"' > build-version.inc
 
 %{__make}
 
