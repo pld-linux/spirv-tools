@@ -1,21 +1,21 @@
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	2019.4
+Version:	2020.1
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
-# TODO:		https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
-Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}.tar.gz
-# Source0-md5:	c666f17aa0338af05918270885f81a6c
+Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
+# Source0-md5:	d7c8167ed79cc80234faca8eed243502
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python3 >= 1:3
-BuildRequires:	spirv-headers >= 1.5.1
+BuildRequires:	sed >= 4.0
+BuildRequires:	spirv-headers >= 1.5.1-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,7 +63,7 @@ Projekt SPIR-V Tools udostepnia API do przetwarzania modułów SPIR-V.
 Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
-Requires:	spirv-headers
+Requires:	spirv-headers >= 1.5.1-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
@@ -75,6 +75,8 @@ Pliki nagłówkowe biblioteki SPIR-V Tools.
 %prep
 %setup -q -n SPIRV-Tools-%{version}
 %patch0 -p1
+
+%{__sed} -i -e '1s,/usr/bin/env sh,/bin/sh,' tools/lesspipe/spirv-lesspipe.sh
 
 %build
 install -d build external/spirv-headers/include
@@ -102,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES README.md syntax.md
+%doc CHANGES README.md docs/syntax.md
 %attr(755,root,root) %{_bindir}/spirv-as
 %attr(755,root,root) %{_bindir}/spirv-cfg
 %attr(755,root,root) %{_bindir}/spirv-dis
@@ -125,3 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/spirv-tools
 %{_pkgconfigdir}/SPIRV-Tools.pc
 %{_pkgconfigdir}/SPIRV-Tools-shared.pc
+%{_libdir}/cmake/SPIRV-Tools
+%{_libdir}/cmake/SPIRV-Tools-link
+%{_libdir}/cmake/SPIRV-Tools-opt
+%{_libdir}/cmake/SPIRV-Tools-reduce
