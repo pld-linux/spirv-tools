@@ -14,6 +14,7 @@ URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python3 >= 1:3
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
 BuildRequires:	spirv-headers >= 1.5.4-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
