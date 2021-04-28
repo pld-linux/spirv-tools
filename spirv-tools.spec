@@ -1,21 +1,21 @@
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	2020.3
+Version:	2020.6
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
-# Source0-md5:	1b7d45e6a060d3a2e3dad73531cb0768
+# Source0-md5:	a5e7b94edc9f8ecc798c66a549bba181
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	sed >= 4.0
-BuildRequires:	spirv-headers >= 1.5.1-2
+BuildRequires:	spirv-headers >= 1.5.4-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,7 +63,7 @@ Projekt SPIR-V Tools udostepnia API do przetwarzania modułów SPIR-V.
 Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
-Requires:	spirv-headers >= 1.5.1-2
+Requires:	spirv-headers >= 1.5.4-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
@@ -86,7 +86,8 @@ cd build
 %cmake .. \
 	-DCMAKE_INSTALL_INCLUDEDIR:PATH=include \
 	-DCMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
-	-DSPIRV-Headers_SOURCE_DIR=/usr
+	-DSPIRV-Headers_SOURCE_DIR=/usr \
+	-DSPIRV_TOOLS_BUILD_STATIC=OFF
 
 # we know better than utils/update_build_version.py
 echo '"spirv-tools %{version}\\n"' > build-version.inc
