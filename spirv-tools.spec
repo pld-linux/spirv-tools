@@ -87,7 +87,8 @@ cd build
 	-DCMAKE_INSTALL_INCLUDEDIR:PATH=include \
 	-DCMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
 	-DSPIRV-Headers_SOURCE_DIR=/usr \
-	-DSPIRV_TOOLS_BUILD_STATIC=OFF
+	-DSPIRV_TOOLS_BUILD_STATIC=OFF \
+	-DSPIRV_WERROR=OFF
 
 # we know better than utils/update_build_version.py
 echo '"spirv-tools %{version}\\n"' > build-version.inc
