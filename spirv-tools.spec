@@ -1,14 +1,15 @@
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	2020.6
+# release just few commits after sdk-1.2.198.0 tag, adjusted for spirv-headers 1.5.5
+Version:	2021.4
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
-# Source0-md5:	a5e7b94edc9f8ecc798c66a549bba181
+# Source0-md5:	bb36f699fcaca7362b983d75fa5a547b
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
@@ -16,7 +17,7 @@ BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
-BuildRequires:	spirv-headers >= 1.5.4-2
+BuildRequires:	spirv-headers >= 1.5.5
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -64,7 +65,7 @@ Projekt SPIR-V Tools udostepnia API do przetwarzania modułów SPIR-V.
 Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
-Requires:	spirv-headers >= 1.5.4-2
+Requires:	spirv-headers >= 1.5.5
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
@@ -116,6 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/spirv-dis
 %attr(755,root,root) %{_bindir}/spirv-lesspipe.sh
 %attr(755,root,root) %{_bindir}/spirv-link
+%attr(755,root,root) %{_bindir}/spirv-lint
 %attr(755,root,root) %{_bindir}/spirv-opt
 %attr(755,root,root) %{_bindir}/spirv-reduce
 %attr(755,root,root) %{_bindir}/spirv-val
@@ -124,6 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-link.so
+%attr(755,root,root) %{_libdir}/libSPIRV-Tools-lint.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-opt.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-reduce.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-shared.so
@@ -135,5 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/SPIRV-Tools-shared.pc
 %{_libdir}/cmake/SPIRV-Tools
 %{_libdir}/cmake/SPIRV-Tools-link
+%{_libdir}/cmake/SPIRV-Tools-lint
 %{_libdir}/cmake/SPIRV-Tools-opt
 %{_libdir}/cmake/SPIRV-Tools-reduce
