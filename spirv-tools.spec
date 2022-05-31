@@ -1,15 +1,14 @@
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-# release just few commits after sdk-1.2.198.0 tag, adjusted for spirv-headers 1.5.5
-Version:	2021.4
+Version:	2022.2
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
-# Source0-md5:	bb36f699fcaca7362b983d75fa5a547b
+# Source0-md5:	6af71c80940951c7319cbe375802ba46
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 2.8.12
@@ -125,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools.so
+%attr(755,root,root) %{_libdir}/libSPIRV-Tools-diff.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-link.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-lint.so
 %attr(755,root,root) %{_libdir}/libSPIRV-Tools-opt.so
@@ -137,6 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/SPIRV-Tools.pc
 %{_pkgconfigdir}/SPIRV-Tools-shared.pc
 %{_libdir}/cmake/SPIRV-Tools
+%{_libdir}/cmake/SPIRV-Tools-diff
 %{_libdir}/cmake/SPIRV-Tools-link
 %{_libdir}/cmake/SPIRV-Tools-lint
 %{_libdir}/cmake/SPIRV-Tools-opt
