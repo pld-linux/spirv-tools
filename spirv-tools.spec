@@ -2,7 +2,7 @@ Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
 Version:	2022.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
@@ -101,6 +101,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# disable completeness check incompatible with llvm split packaging
+%{__sed} -i -e '/^foreach(target .*IMPORT_CHECK_TARGETS/,/^endforeach/d; /^unset(_IMPORT_CHECK_TARGETS)/d' \
+	$RPM_BUILD_ROOT%{_libdir}/cmake/SPIRV-Tools*/SPIRV-Tools*Target*.cmake
 
 %clean
 rm -rf $RPM_BUILD_ROOT
