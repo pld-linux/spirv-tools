@@ -1,17 +1,17 @@
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	2022.2
-Release:	2
+Version:	2023.1
+Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
-# Source0-md5:	6af71c80940951c7319cbe375802ba46
+# Source0-md5:	77c6658b77e4fa68d0175e88464dc637
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
-BuildRequires:	cmake >= 2.8.12
+BuildRequires:	cmake >= 3.17.2
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.605
@@ -80,11 +80,8 @@ Pliki nagłówkowe biblioteki SPIR-V Tools.
 %{__sed} -i -e '1s,/usr/bin/env sh,/bin/sh,' tools/lesspipe/spirv-lesspipe.sh
 
 %build
-install -d build
-
-cd build
 # .pc file generation expects relative CMAKE_INSTALL_*DIR
-%cmake .. \
+%cmake -B build \
 	-DCMAKE_INSTALL_INCLUDEDIR:PATH=include \
 	-DCMAKE_INSTALL_LIBDIR:PATH=%{_lib} \
 	-DSPIRV-Headers_SOURCE_DIR=/usr \
@@ -92,9 +89,9 @@ cd build
 	-DSPIRV_WERROR=OFF
 
 # we know better than utils/update_build_version.py
-echo '"spirv-tools %{version}\\n"' > build-version.inc
+echo '"spirv-tools %{version}\\n"' > build/build-version.inc
 
-%{__make}
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -146,3 +143,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/SPIRV-Tools-lint
 %{_libdir}/cmake/SPIRV-Tools-opt
 %{_libdir}/cmake/SPIRV-Tools-reduce
+%{_libdir}/cmake/SPIRV-Tools-tools
