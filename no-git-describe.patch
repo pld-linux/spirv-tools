@@ -1,9 +1,9 @@
 --- SPIRV-Tools-2020.6/utils/update_build_version.py.orig	2021-04-28 20:08:33.924348285 +0200
 +++ SPIRV-Tools-2020.6/utils/update_build_version.py	2021-04-28 20:08:57.725592360 +0200
 @@ -143,6 +143,3 @@ def main():
- 
-     with open(output_file, 'w') as f:
-         f.write(new_content)
+     mkdir_p(os.path.dirname(output_file_path))
+     with open(output_file_path, 'w') as f:
+         f.write(content)
 -
 -if __name__ == '__main__':
 -    main()
