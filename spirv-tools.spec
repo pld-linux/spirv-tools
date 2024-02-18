@@ -1,22 +1,23 @@
+%define		gitref	vulkan-sdk-1.3.275.0
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-Version:	2023.2
+Version:	2023.6
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
-Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/v%{version}/SPIRV-Tools-%{version}.tar.gz
-# Source0-md5:	b4203c666c047ee31167a2f95fed1bf6
+Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{gitref}/SPIRV-Tools-%{gitref}.tar.gz
+# Source0-md5:	f187bb132058995a5992a5a15c269bb1
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 3.17.2
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
-BuildRequires:	spirv-headers >= 1.5.5
+BuildRequires:	spirv-headers >= 1.6.1-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -64,7 +65,7 @@ Projekt SPIR-V Tools udostepnia API do przetwarzania modułów SPIR-V.
 Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
-Requires:	spirv-headers >= 1.5.5
+Requires:	spirv-headers >= 1.6.1-2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
@@ -74,7 +75,7 @@ Header files for SPIR-V Tools library.
 Pliki nagłówkowe biblioteki SPIR-V Tools.
 
 %prep
-%setup -q -n SPIRV-Tools-%{version}
+%setup -q -n SPIRV-Tools-%{gitref}
 %patch0 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env sh,/bin/sh,' tools/lesspipe/spirv-lesspipe.sh
@@ -118,6 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/spirv-lesspipe.sh
 %attr(755,root,root) %{_bindir}/spirv-link
 %attr(755,root,root) %{_bindir}/spirv-lint
+%attr(755,root,root) %{_bindir}/spirv-objdump
 %attr(755,root,root) %{_bindir}/spirv-opt
 %attr(755,root,root) %{_bindir}/spirv-reduce
 %attr(755,root,root) %{_bindir}/spirv-val
