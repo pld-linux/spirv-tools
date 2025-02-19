@@ -76,7 +76,7 @@ Pliki nagłówkowe biblioteki SPIR-V Tools.
 
 %prep
 %setup -q -n SPIRV-Tools-%{gitref}
-%patch0 -p1
+%patch -P0 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env sh,/bin/sh,' tools/lesspipe/spirv-lesspipe.sh
 
