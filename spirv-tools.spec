@@ -11,6 +11,7 @@ Group:		Development/Tools
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{gitref}/SPIRV-Tools-%{gitref}.tar.gz
 # Source0-md5:	4a3f873a07f33cffd70890e17a34fe8b
 Patch0:		no-git-describe.patch
+Patch1:		5534.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 3.17.2
 BuildRequires:	libstdc++-devel >= 6:7
@@ -77,6 +78,7 @@ Pliki nagłówkowe biblioteki SPIR-V Tools.
 %prep
 %setup -q -n SPIRV-Tools-%{gitref}
 %patch -P0 -p1
+%patch -P1 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env sh,/bin/sh,' tools/lesspipe/spirv-lesspipe.sh
 
