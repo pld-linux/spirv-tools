@@ -1,16 +1,16 @@
-%define		gitref	vulkan-sdk-1.4.309.0
+%define		gitref	vulkan-sdk-1.4.321.0
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-# actually tagged as 2025.1.rc1 (beside vulkan-sdk- tag)
-Version:	2025.1
+# actually tagged as 2025.3.rc1 (beside vulkan-sdk- tag)
+Version:	2025.3
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{gitref}/SPIRV-Tools-%{gitref}.tar.gz
-# Source0-md5:	6e0516ab3432a38cf9b51af568d6eb50
+# Source0-md5:	bd91a34dcbd8301cba5f4fa9524c7d9f
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 3.17.2
@@ -18,7 +18,7 @@ BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
-BuildRequires:	spirv-headers >= 1.6.1-5
+BuildRequires:	spirv-headers >= 1.6.1-7
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,7 +66,7 @@ Projekt SPIR-V Tools udostepnia API do przetwarzania modułów SPIR-V.
 Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
-Requires:	spirv-headers >= 1.6.1-4
+Requires:	spirv-headers >= 1.6.1-7
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
