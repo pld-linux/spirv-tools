@@ -1,24 +1,24 @@
-%define		gitref	vulkan-sdk-1.4.321.0
+%define		gitref	vulkan-sdk-1.4.341.0
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-# actually tagged as 2025.3.rc1 (beside vulkan-sdk- tag)
-Version:	2025.3
+# actually tagged as 2026.1 (beside vulkan-sdk- tag)
+Version:	2026.1
 Release:	1
 Epoch:		1
 License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{gitref}/SPIRV-Tools-%{gitref}.tar.gz
-# Source0-md5:	bd91a34dcbd8301cba5f4fa9524c7d9f
+# Source0-md5:	a5f6164b806514cf7a0fc333b50b5e6d
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
-BuildRequires:	cmake >= 3.17.2
+BuildRequires:	cmake >= 3.22.1
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
-BuildRequires:	spirv-headers >= 1.6.1-7
+BuildRequires:	spirv-headers >= 1.6.1-9
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,7 +66,7 @@ Projekt SPIR-V Tools udostepnia API do przetwarzania modułów SPIR-V.
 Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
-Requires:	spirv-headers >= 1.6.1-7
+Requires:	spirv-headers >= 1.6.1-9
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
@@ -116,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES README.md docs/syntax.md
 %attr(755,root,root) %{_bindir}/spirv-as
 %attr(755,root,root) %{_bindir}/spirv-cfg
+%attr(755,root,root) %{_bindir}/spirv-diff
 %attr(755,root,root) %{_bindir}/spirv-dis
 %attr(755,root,root) %{_bindir}/spirv-lesspipe.sh
 %attr(755,root,root) %{_bindir}/spirv-link
@@ -127,13 +128,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools.so
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools-diff.so
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools-link.so
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools-lint.so
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools-opt.so
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools-reduce.so
-%attr(755,root,root) %{_libdir}/libSPIRV-Tools-shared.so
+%{_libdir}/libSPIRV-Tools.so
+%{_libdir}/libSPIRV-Tools-diff.so
+%{_libdir}/libSPIRV-Tools-link.so
+%{_libdir}/libSPIRV-Tools-lint.so
+%{_libdir}/libSPIRV-Tools-opt.so
+%{_libdir}/libSPIRV-Tools-reduce.so
+%{_libdir}/libSPIRV-Tools-shared.so
 
 %files devel
 %defattr(644,root,root,755)
