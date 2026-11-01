@@ -2,8 +2,7 @@
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
-# actually tagged as 2026.1 (beside vulkan-sdk- tag)
-Version:	2026.3
+Version:	2026.4
 Release:	1
 Epoch:		1
 License:	Apache v2.0
@@ -18,8 +17,8 @@ BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sed >= 4.0
-BuildRequires:	spirv-headers >= 1.6.1-10
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+BuildRequires:	spirv-headers >= 1.6.1-11
+Requires:	%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -67,7 +66,7 @@ Summary:	Header files for SPIR-V Tools library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SPIR-V Tools
 Group:		Development/Libraries
 Requires:	spirv-headers >= 1.6.1-10
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description devel
 Header files for SPIR-V Tools library.
@@ -113,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES README.md docs/syntax.md
+%doc CHANGES README.md SECURITY.md docs/syntax.md
 %attr(755,root,root) %{_bindir}/spirv-as
 %attr(755,root,root) %{_bindir}/spirv-cfg
 %attr(755,root,root) %{_bindir}/spirv-diff
