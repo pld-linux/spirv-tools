@@ -1,4 +1,4 @@
-%define		gitref	vulkan-sdk-1.4.357.0
+%define		gitref	vulkan-sdk-1.4.363.0
 Summary:	Khronos SPIR-V Tools
 Summary(pl.UTF-8):	Narzędzia SPIR-V z projektu Khronos
 Name:		spirv-tools
@@ -9,7 +9,7 @@ License:	Apache v2.0
 Group:		Development/Tools
 #Source0Download: https://github.com/KhronosGroup/SPIRV-Tools/releases
 Source0:	https://github.com/KhronosGroup/SPIRV-Tools/archive/%{gitref}/SPIRV-Tools-%{gitref}.tar.gz
-# Source0-md5:	c357eec1e33bc95e650aa4c8efdd3b13
+# Source0-md5:	4cf82d1cce7831a2a6d3ea7508c48921
 Patch0:		no-git-describe.patch
 URL:		https://github.com/KhronosGroup/SPIRV-Tools
 BuildRequires:	cmake >= 3.22.1
